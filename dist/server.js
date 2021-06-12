@@ -48,10 +48,7 @@ app.get('/', async (req, res) => {
     let { data, error } = await supabase
         .from('todos')
         .select('*');
-    const DATA = {
-        data: Object.assign({}, data),
-    };
-    await Message(res, error, DATA);
+    await Message(res, error, data);
 });
 app.post('/insert', async (req, res) => {
     const { todo } = req.body;

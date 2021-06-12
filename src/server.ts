@@ -37,11 +37,8 @@ app.get('/', async (req: Request, res: Response) => {
         .from('todos')
         .select('*')
 
-    const DATA = {
-        data: { ...data },
-    }
 
-    await Message(res, error, DATA);
+    await Message(res, error, data);
 })
 
 app.post('/insert', async (req: Request, res: Response) => {
