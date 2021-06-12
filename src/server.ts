@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import { createClient } from '@supabase/supabase-js'
 import * as dotenv from 'dotenv'
+import cors from 'cors'
 import { load } from 'ts-dotenv'
 
 dotenv.config()
@@ -16,6 +17,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 const app = express()
 app.use(express.json())
+app.use(cors());
 
 
 const Message = async (res: Response, error: any, data: any) => {
@@ -66,4 +68,4 @@ app.delete('/delete/:id', async (req: Request, res: Response) => {
     return error ? false : true;
 })
 
-app.listen(3300)
+app.listen(process.env.PORT || 3300)
