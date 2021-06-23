@@ -37,7 +37,6 @@ app.get('/', async (req: Request, res: Response) => {
         .from('todos')
         .select('*')
 
-
     await Message(res, error, data);
 })
 
@@ -63,6 +62,17 @@ app.delete('/delete/:id', async (req: Request, res: Response) => {
 
     data?.length === 0 ? res.send('Id inexistente!') : res.send(data);
     return error ? false : true;
+})
+
+app.put('/update/:id', async (req: Request, res: Response) => {
+    const { id, status, task } = req.params;
+
+    const { data, error } = await supabase
+        .from('todos')
+        .update({ status: status })
+        .match({ 'id': id });
+
+    await Message(res, error, data)
 })
 
 app.listen(process.env.PORT || 3300)
