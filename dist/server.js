@@ -68,4 +68,13 @@ app.delete('/delete/:id', async (req, res) => {
     (data === null || data === void 0 ? void 0 : data.length) === 0 ? res.send('Id inexistente!') : res.send(data);
     return error ? false : true;
 });
+app.put('/update/:id', async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    const { data, error } = await supabase
+        .from('todos')
+        .update({ status })
+        .eq('id', id);
+    await Message(res, error, data);
+});
 app.listen(process.env.PORT || 3300);

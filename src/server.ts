@@ -65,12 +65,13 @@ app.delete('/delete/:id', async (req: Request, res: Response) => {
 })
 
 app.put('/update/:id', async (req: Request, res: Response) => {
-    const { id, status, task } = req.params;
+    const { id } = req.params;
+    const { status } = req.body;
 
     const { data, error } = await supabase
         .from('todos')
-        .update({ status: status })
-        .match({ 'id': id });
+        .update({ status })
+        .eq('id', id);
 
     await Message(res, error, data)
 })
