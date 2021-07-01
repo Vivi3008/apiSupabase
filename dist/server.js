@@ -47,7 +47,8 @@ const Message = async (res, error, data) => {
 app.get('/', async (req, res) => {
     let { data, error } = await supabase
         .from('todos')
-        .select('*');
+        .select('*')
+        .order('id', { ascending: true });
     await Message(res, error, data);
 });
 app.post('/insert', async (req, res) => {

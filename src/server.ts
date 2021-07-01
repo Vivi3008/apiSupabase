@@ -36,6 +36,7 @@ app.get('/', async (req: Request, res: Response) => {
     let { data, error } = await supabase
         .from('todos')
         .select('*')
+        .order('id', { ascending: true });
 
     await Message(res, error, data);
 })
